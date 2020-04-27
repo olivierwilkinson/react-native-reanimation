@@ -1,0 +1,37 @@
+{
+  "name": "react-native-reanimation",
+  "version": "0.0.1",
+  "description": "Merging the simplicity of react-native-animatible with the performance of react-native-reanimated using hooks",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "prepublish": "tsc",
+  "keywords": [
+    "react-native",
+    "react",
+    "native",
+    "animation",
+    "reanimation",
+    "animated",
+    "reanimated",
+    "animatible",
+    "reanimatible",
+    "hooks"
+  ],
+  "author": "Olivier Wilkinson",
+  "license": "ISC",
+  "dependencies": {
+    "lodash": "^4.17.15"
+  },
+  "peerDependencies": {
+    "react": "^16.13.1",
+    "react-native-reanimated": "^1.8.0"
+  },
+  "devDependencies": {
+    "@types/lodash": "^4.14.150",
+    "@types/react": "^16.9.34",
+    "typescript": "^3.8.3"
+  }
+}
