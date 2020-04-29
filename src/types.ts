@@ -1,4 +1,7 @@
 import Animated from "react-native-reanimated";
+import { ViewStyle } from 'react-native';
+
+/* Base Animation Types */
 
 export interface TimingAnimation {
   state: Animated.TimingState;
@@ -65,3 +68,23 @@ export type SetUseAnimationStateParams<T extends Animation> = Omit<Partial<T>, '
 export interface SetUseAnimationState<T extends Animation> {
   (params?: SetUseAnimationStateParams<T>): void;
 }
+
+/* Animatable Animation Types */
+
+export type AnimationStep = {
+  [style: string]: number | string;
+};
+
+export type AnimationDefinition = {
+  [input: number]: AnimationStep;
+  from?: AnimationStep;
+  to?: AnimationStep;
+  easing?: Animated.EasingFunction;
+  style?: {
+    [style: string]: any;
+  };
+};
+
+export type AnimationStyle = ViewStyle & {
+  transform?: { [transformStyle: string]: Animated.Node<number | string> }[];
+};

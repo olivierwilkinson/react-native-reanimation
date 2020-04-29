@@ -19,9 +19,10 @@ import {
   evaluateIterationCount,
   continueIterating,
   isInfinite,
-  makeDefaultBlocks,
-  evalBlock,
-} from "../helpers";
+} from "../helpers/iteration";
+import { makeDefaultBlocks, evalBlock } from "../helpers/blocks";
+import { makeDefaultConfig } from "../helpers/config";
+import { makeDefaultState } from '../helpers/state';
 import {
   UseAnimationParams,
   UseAnimationState,
@@ -30,7 +31,6 @@ import {
   AnimateBlocks,
   AnimateBlock,
 } from "../types";
-import { makeDefaultState, makeDefaultConfig } from "../helpers";
 
 export default function useAnimation<T extends Animation>({
   state: customState = makeDefaultState(),
@@ -90,7 +90,10 @@ export default function useAnimation<T extends Animation>({
         ),
         [
           // @ts-ignore
-          cond(defined(current.state.velocity), set(state.velocity, current.state.velocity)),
+          cond(
+            defined(current.state.velocity),
+            set(state.velocity, current.state.velocity)
+          ),
           set(state.position, current.state.position),
           evaluate("start", blocks.start),
           startClock(clock),
