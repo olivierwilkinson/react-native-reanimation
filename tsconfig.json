@@ -12,6 +12,7 @@
     "noImplicitReturns": true,
     "forceConsistentCasingInFileNames": true,
     "noUnusedParameters": true,
-    "downlevelIteration": true,
-  }
+    "downlevelIteration": true
+  },
+  "exclude": ["./examples/*"]
 }

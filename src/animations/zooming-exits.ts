@@ -1,4 +1,5 @@
-import { Easing } from "react-native-reanimated";
+// @ts-ignore
+import Animated, { Easing } from "react-native-reanimated";
 
 function makeZoomOutTranslation(translationType: string, pivotPoint: number) {
   const modifier = Math.min(1, Math.max(-1, pivotPoint));

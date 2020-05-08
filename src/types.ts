@@ -1,5 +1,5 @@
 import Animated from "react-native-reanimated";
-import { ViewStyle } from 'react-native';
+import { ViewStyle } from "react-native";
 
 /* Base Animation Types */
 
@@ -25,14 +25,14 @@ export type UseAnimationState<T extends Animation> = {
   config: T["config"];
   iterationCount: number;
   iteration: Animated.Value<number>;
-  clock: Animated.Clock,
+  clock: Animated.Clock;
 };
 
 export type AnimateBlockParams<T extends Animation> = {
-  state: Omit<T["state"], 'velocity'> & { velocity: Animated.Value<number> };
-  config: Omit<T["config"], 'toValue'> & { toValue: Animated.Value<number> };
-  current: UseAnimationState<T>; 
-}
+  state: Omit<T["state"], "velocity"> & { velocity: Animated.Value<number> };
+  config: Omit<T["config"], "toValue"> & { toValue: Animated.Value<number> };
+  current: UseAnimationState<T>;
+};
 
 export interface AnimateBlock<T extends Animation> {
   (params: AnimateBlockParams<T>): Animated.Node<any>;
@@ -60,10 +60,13 @@ export interface UseAnimationParams<T extends Animation> {
   debug?: (params: AnimateBlockParams<T>) => Animated.Node<any> | undefined;
 }
 
-export type SetUseAnimationStateParams<T extends Animation> = Omit<Partial<T>, 'state' | 'config'> & {
+export type SetUseAnimationStateParams<T extends Animation> = Omit<
+  Partial<T>,
+  "state" | "config"
+> & {
   state?: Partial<T["state"]>;
   config?: Partial<T["config"]>;
-}
+};
 
 export interface SetUseAnimationState<T extends Animation> {
   (params?: SetUseAnimationStateParams<T>): void;
@@ -85,6 +88,44 @@ export type AnimationDefinition = {
   };
 };
 
+export type Transform =
+  | {
+      skewX: Animated.Node<string>;
+    }
+  | {
+      skewY: Animated.Node<string>;
+    }
+  | {
+      rotate: Animated.Node<string>;
+    }
+  | {
+      rotateX: Animated.Node<string>;
+    }
+  | {
+      rotateY: Animated.Node<string>;
+    }
+  | {
+      rotateZ: Animated.Node<string>;
+    }
+  | {
+      perspective: Animated.Node<number>;
+    }
+  | {
+      scale: Animated.Node<number>;
+    }
+  | {
+      scaleX: Animated.Node<number>;
+    }
+  | {
+      scaleY: Animated.Node<number>;
+    }
+  | {
+      translateX: Animated.Node<number>;
+    }
+  | {
+      translateY: Animated.Node<number>;
+    };
+
 export type AnimationStyle = ViewStyle & {
-  transform?: { [transformStyle: string]: Animated.Node<number | string> }[];
+  transform?: Transform[];
 };

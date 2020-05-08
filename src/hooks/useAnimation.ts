@@ -90,10 +90,7 @@ export default function useAnimation<T extends Animation>({
         ),
         [
           // @ts-ignore
-          cond(
-            defined(current.state.velocity),
-            set(state.velocity, current.state.velocity)
-          ),
+          cond(defined(current.state.velocity), set(state.velocity, current.state.velocity)),
           set(state.position, current.state.position),
           evaluate("start", blocks.start),
           startClock(clock),

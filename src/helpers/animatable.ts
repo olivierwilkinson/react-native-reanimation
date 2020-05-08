@@ -29,6 +29,7 @@ export const combineAnimatedStyles = (animationStyles: AnimationStyle[]) =>
     (accumulatedStyles, animationStyle) => ({
       ...accumulatedStyles,
       ...animationStyle,
+      // @ts-ignore
       transform:
         animationStyle.transform === undefined
           ? accumulatedStyles.transform

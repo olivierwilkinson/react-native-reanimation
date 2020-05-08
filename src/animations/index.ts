@@ -1,3 +1,6 @@
+// @ts-ignore
+import Animated from 'react-native-reanimated';
+
 import * as attentionSeekers from "./attention-seekers";
 import * as bouncingEntrances from "./bouncing-entrances";
 import * as bouncingExits from "./bouncing-exits";

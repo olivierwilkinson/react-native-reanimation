@@ -1,4 +1,5 @@
-import { Easing } from "react-native-reanimated";
+// @ts-ignore
+import Animated, { Easing } from "react-native-reanimated";
 
 export const lightSpeedIn = {
   easing: Easing.out(Easing.ease),
