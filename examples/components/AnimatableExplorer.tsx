@@ -1,9 +1,14 @@
 import React, { useState } from "react";
 import styled from "styled-components/native";
 import Animated from "react-native-reanimated";
-import { useAnimatable, AnimationDefinition, Animations } from "react-native-reanimation";
-import { TouchableOpacity, Text } from "react-native";
+import {
+  useAnimatable,
+  AnimationDefinition,
+  Animations,
+} from "react-native-reanimation";
+import { TouchableOpacity } from "react-native";
 
+import Cell from "./Cell";
 import PickerActionSheet from "./PickerActionSheet";
 
 const AnimationKeys = Object.keys(Animations);
@@ -11,12 +16,18 @@ const AnimationKeys = Object.keys(Animations);
 const ContainerView = styled.View`
   display: flex;
   align-items: center;
-  justify-content: space-around;
   padding: 10px;
   height: 100%;
 `;
 
-const AnimatedSquare = styled(Animated.View)`
+const SquareContainer = styled.View`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1 1 auto;
+`;
+
+const Square = styled.View`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -27,21 +38,39 @@ const AnimatedSquare = styled(Animated.View)`
 
 export default () => {
   const [animationSelectActive, setAnimationSelectActive] = useState(false);
+  const [iterationSelectActive, setIterationSelectActive] = useState(false);
   const [animation, setAnimation] = useState<AnimationDefinition>(
     Animations.bounce
   );
-  const [animationStyle] = useAnimatable(animation, {
-    iterationCount: "infinite",
+  const [iterationCount, setIterationCount] = useState<number | "infinite">(
+    "infinite"
+  );
+  const [animationStyle, animate] = useAnimatable(animation, {
+    iterationCount,
   });
 
   return (
     <>
       <ContainerView>
-        <TouchableOpacity onPress={() => setAnimationSelectActive(true)}>
-          <Text>Choose Animation</Text>
-        </TouchableOpacity>
+        <Cell
+          color="rgb(100,100,100)"
+          text="Choose Animation"
+          onPress={() => setAnimationSelectActive(true)}
+        />
 
-        <AnimatedSquare />
+        <Cell
+          color="rgb(100,100,100)"
+          text="Choose Iteration Count"
+          onPress={() => setIterationSelectActive(true)}
+        />
+
+        <SquareContainer>
+          <Animated.View style={animationStyle}>
+            <TouchableOpacity onPress={() => animate()}>
+              <Square />
+            </TouchableOpacity>
+          </Animated.View>
+        </SquareContainer>
       </ContainerView>
 
       <PickerActionSheet
@@ -53,6 +82,21 @@ export default () => {
           setAnimationSelectActive(false);
         }}
         options={AnimationKeys}
+      />
+
+      <PickerActionSheet
+        visible={iterationSelectActive}
+        onCancel={() => setIterationSelectActive(false)}
+        onDone={(newIterationCount) => {
+          if (newIterationCount === "infinite") {
+            setIterationCount(newIterationCount);
+          } else {
+            setIterationCount(+newIterationCount);
+          }
+
+          setIterationSelectActive(false);
+        }}
+        options={["infinite", "1", "2"]}
       />
     </>
   );

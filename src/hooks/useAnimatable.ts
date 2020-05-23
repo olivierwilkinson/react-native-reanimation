@@ -1,24 +1,21 @@
 import useTiming from "./useTiming";
 import {
-  UseAnimationParams,
-  TimingAnimation,
-  SetUseAnimationState,
   AnimationDefinition,
-  AnimationStyle
+  AnimationStyle,
+  BaseParams,
+  UseTimingParams,
+  TimingAnimation
 } from "../types";
 import { createAnimatedStyle } from "../helpers/animatable";
 
 export default function useAnimatable(
   animation: AnimationDefinition,
-  params: UseAnimationParams<TimingAnimation> = {}
-): [AnimationStyle, SetUseAnimationState<TimingAnimation>] {
+  params: BaseParams<TimingAnimation>
+): [AnimationStyle, (params?: UseTimingParams) => void] {
   const [animationNode, setAnimation] = useTiming({
+    easing: animation.easing,
+    iterationCount: 1,
     ...params,
-    config: {
-      toValue: 1,
-      easing: animation.easing,
-      ...params.config,
-    },
   });
 
   return [createAnimatedStyle(animation, animationNode), setAnimation];

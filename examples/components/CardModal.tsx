@@ -15,24 +15,23 @@ const TitleView = styled.View`
   align-items: center;
   justify-content: center;
   padding: 10px;
-  background: rgb(200, 200, 200);
-  border-top-right-radius: 30px;
-  border-top-left-radius: 30px;
-  height: 55px;
+  background: rgb(100, 100, 100);
+  border-top-right-radius: 15px;
+  border-top-left-radius: 15px;
 `;
 
 const TitleText = styled.Text`
-  font-weight: 600;
-  font-size: 24px;
+  font-size: 20px;
   color: white;
 `;
 
 const HeaderText = styled.Text`
-  font-size: 24px;
+  font-size: 16px;
+  padding: 5px 0;
   color: white;
 `;
 
-const CloseTouchableOpacity = styled.TouchableOpacity`
+const CloseTouchableHighlight = styled.TouchableHighlight`
   position: absolute;
   right: 14px;
 `;
@@ -56,12 +55,12 @@ export default ({ visible, title, onClose, children }: Props) => (
       <TitleView>
         <TitleText>{title}</TitleText>
 
-        <CloseTouchableOpacity
+        <CloseTouchableHighlight
           testID="card-modal-close-button"
           onPress={onClose}
         >
           <HeaderText>Close</HeaderText>
-        </CloseTouchableOpacity>
+        </CloseTouchableHighlight>
       </TitleView>
 
       {children}

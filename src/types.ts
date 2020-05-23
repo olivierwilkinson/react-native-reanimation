@@ -3,19 +3,39 @@ import { ViewStyle } from "react-native";
 
 /* Base Animation Types */
 
+export interface TimingConfig {
+  toValue: Animated.Value<number>;
+  duration: Animated.Value<number>;
+  easing: Animated.EasingFunction;
+}
+
+export interface SpringConfig {
+  damping: Animated.Value<number>;
+  mass: Animated.Value<number>;
+  stiffness: Animated.Value<number>;
+  overshootClamping: Animated.Value<number> | Animated.Value<boolean>;
+  restSpeedThreshold: Animated.Value<number>;
+  restDisplacementThreshold: Animated.Value<number>;
+  toValue: Animated.Value<number>;
+}
+
+export interface DecayConfig {
+  deceleration: Animated.Value<number>;
+}
+
 export interface TimingAnimation {
   state: Animated.TimingState;
-  config: Animated.TimingConfig;
+  config: TimingConfig;
 }
 
 export interface SpringAnimation {
   state: Animated.SpringState;
-  config: Animated.SpringConfig;
+  config: SpringConfig;
 }
 
 export interface DecayAnimation {
   state: Animated.DecayState;
-  config: Animated.DecayConfig;
+  config: DecayConfig;
 }
 
 export type Animation = SpringAnimation | DecayAnimation | TimingAnimation;
@@ -23,57 +43,50 @@ export type Animation = SpringAnimation | DecayAnimation | TimingAnimation;
 export type UseAnimationState<T extends Animation> = {
   state: T["state"];
   config: T["config"];
-  iterationCount: number;
   iteration: Animated.Value<number>;
   clock: Animated.Clock;
 };
 
-export type AnimateBlockParams<T extends Animation> = {
-  state: Omit<T["state"], "velocity"> & { velocity: Animated.Value<number> };
-  config: Omit<T["config"], "toValue"> & { toValue: Animated.Value<number> };
-  current: UseAnimationState<T>;
-};
-
 export interface AnimateBlock<T extends Animation> {
-  (params: AnimateBlockParams<T>): Animated.Node<any>;
+  (params: UseAnimationState<T>): Animated.Node<any>;
 }
-
 export interface AnimateBlocks<T extends Animation> {
-  start?: AnimateBlock<T>;
-  before?: AnimateBlock<T>;
-  after?: AnimateBlock<T>;
-  afterIteration?: AnimateBlock<T>;
-  finished?: AnimateBlock<T>;
+  start: AnimateBlock<T>;
+  before: AnimateBlock<T>;
+  after: AnimateBlock<T>;
+  afterIteration: AnimateBlock<T>;
+  finished: AnimateBlock<T>;
 }
 
-export interface UseAnimationParams<T extends Animation> {
-  animation?: (
-    clock: Animated.Clock,
-    state: T["state"],
-    config: T["config"]
-  ) => Animated.Adaptable<number>;
+export interface BaseParams<T extends Animation> {
   clock?: Animated.Clock;
-  state?: Partial<T["state"]>;
-  config?: Partial<T["config"]>;
   iterationCount?: number | "infinite";
-  blocks?: AnimateBlocks<T>;
-  debug?: (params: AnimateBlockParams<T>) => Animated.Node<any> | undefined;
+  position?: number;
+  toValue?: number;
+  blocks?: Partial<AnimateBlocks<T>>;
 }
 
-export type SetUseAnimationStateParams<T extends Animation> = Omit<
-  Partial<T>,
-  "state" | "config"
-> & {
-  state?: Partial<T["state"]>;
-  config?: Partial<T["config"]>;
-};
+export interface UseSpringParams extends BaseParams<SpringAnimation> {
+  velocity?: number;
+  damping?: number;
+  mass?: number;
+  stiffness?: number;
+  overshootClamping?: number | boolean;
+  restSpeedThreshold?: number;
+  restDisplacementThreshold?: number;
+}
 
-export interface SetUseAnimationState<T extends Animation> {
-  (params?: SetUseAnimationStateParams<T>): void;
+export interface UseDecayParams extends BaseParams<DecayAnimation> {
+  velocity?: number;
+  deceleration?: number;
+}
+
+export interface UseTimingParams extends BaseParams<TimingAnimation> {
+  duration?: number;
+  easing?: Animated.EasingFunction;
 }
 
 /* Animatable Animation Types */
-
 export type AnimationStep = {
   [style: string]: number | string;
 };

@@ -1,11 +1,7 @@
-import {
-  AnimationStyle,
-  SetUseAnimationState,
-  TimingAnimation,
-} from "../types";
+import { AnimationStyle, UseTimingParams } from "../types";
 import { combineAnimatedStyles } from "../helpers/animatable";
 
-type Animatable = [AnimationStyle, SetUseAnimationState<TimingAnimation>];
+type Animatable = [AnimationStyle, (params: UseTimingParams) => void];
 
 export default function useCombinedAnimation(
   animations: Animatable[]
