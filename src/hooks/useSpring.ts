@@ -14,7 +14,7 @@ import Animated, {
   spring,
 } from "react-native-reanimated";
 
-import { UseSpringParams, UseAnimationState, SpringAnimation } from "../types";
+import { UseSpringParams, AnimationValues, SpringAnimation } from "../types";
 import { continueIterating, isInfinite } from "../helpers/iteration";
 import { makeDefaultBlocks } from "../helpers/blocks";
 import { evaluateIterationCount } from "../helpers/iteration";
@@ -47,7 +47,7 @@ export default function useSpring({
 }: UseSpringParams = {}): [
   Animated.Node<number>,
   (params?: UseSpringParams) => void,
-  UseAnimationState<SpringAnimation>
+  AnimationValues<SpringAnimation>
 ] {
   const iterationCount = evaluateIterationCount(initialIterationCount);
   const initialConfig = {
@@ -131,6 +131,9 @@ export default function useSpring({
           initialConfig.restDisplacementThreshold
       );
     },
-    current,
+    {
+      ...state,
+      ...config,
+    },
   ];
 }

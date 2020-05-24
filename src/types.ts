@@ -40,6 +40,8 @@ export interface DecayAnimation {
 
 export type Animation = SpringAnimation | DecayAnimation | TimingAnimation;
 
+export type AnimationValues<T extends Animation> = T["state"] & T["config"];
+
 export type UseAnimationState<T extends Animation> = {
   state: T["state"];
   config: T["config"];

@@ -15,7 +15,7 @@ import Animated, {
   timing,
 } from "react-native-reanimated";
 
-import { UseTimingParams, TimingAnimation, UseAnimationState } from "../types";
+import { UseTimingParams, TimingAnimation, AnimationValues } from "../types";
 import { continueIterating, isInfinite } from "../helpers/iteration";
 import { makeDefaultBlocks } from "../helpers/blocks";
 import { evaluateIterationCount } from "../helpers/iteration";
@@ -31,7 +31,7 @@ export default function useTiming({
 }: UseTimingParams = {}): [
   Animated.Node<number>,
   (params?: UseTimingParams) => void,
-  UseAnimationState<TimingAnimation>
+  AnimationValues<TimingAnimation>
 ] {
   const iterationCount = evaluateIterationCount(initialIterationCount);
   const { current } = useRef({
@@ -93,6 +93,9 @@ export default function useTiming({
       config.toValue.setValue(next?.toValue || toValue);
       config.duration.setValue(next?.duration || duration);
     },
-    current,
+    {
+      ...state,
+      ...config
+    },
   ];
 }

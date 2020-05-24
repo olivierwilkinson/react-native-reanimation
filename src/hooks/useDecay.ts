@@ -14,7 +14,7 @@ import Animated, {
   decay,
 } from "react-native-reanimated";
 
-import { UseDecayParams, UseAnimationState, DecayAnimation } from "../types";
+import { UseDecayParams, AnimationValues, DecayAnimation } from "../types";
 import { continueIterating, isInfinite } from "../helpers/iteration";
 import { makeDefaultBlocks } from "../helpers/blocks";
 import { evaluateIterationCount } from "../helpers/iteration";
@@ -30,7 +30,7 @@ export default function useDecay({
 }: UseDecayParams = {}): [
   Animated.Node<number>,
   (params?: UseDecayParams) => void,
-  UseAnimationState<DecayAnimation>
+  AnimationValues<DecayAnimation>
 ] {
   const iterationCount = evaluateIterationCount(initialIterationCount);
   const { current } = useRef({
@@ -90,6 +90,9 @@ export default function useDecay({
       config.toValue.setValue(next?.toValue || toValue);
       config.deceleration.setValue(next?.deceleration || deceleration);
     },
-    current,
+    {
+      ...state,
+      ...config,
+    },
   ];
 }
