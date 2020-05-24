@@ -1,6 +1,6 @@
 import useTiming from "./useTiming";
 import useSpring from "./useSpring";
 import useDecay from "./useDecay";
-import useAnimatable from "./useAnimatable";
+import useAnimatedStyle from "./useAnimatedStyle";
 
-export { useTiming, useSpring, useDecay, useAnimatable };
+export { useTiming, useSpring, useDecay, useAnimatedStyle };

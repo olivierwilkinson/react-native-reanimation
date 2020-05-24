@@ -1,8 +1,13 @@
 import React from "react";
 import styled from "styled-components/native";
 
+const CellContainer = styled.View`
+  position: relative;
+  padding: 10px 5px;
+  width: 100%;
+`;
+
 const Cell = styled.TouchableOpacity`
-  margin: 10px 5px;
   padding: 10px;
   background-color: ${({ color }: { color: string }) => color};
   display: flex;
@@ -23,7 +28,9 @@ export type Props = {
 };
 
 export default ({ color, onPress, text }: Props) => (
-  <Cell color={color} onPress={onPress}>
-    <CellText>{text}</CellText>
-  </Cell>
+  <CellContainer>
+    <Cell color={color} onPress={onPress}>
+      <CellText>{text}</CellText>
+    </Cell>
+  </CellContainer>
 );

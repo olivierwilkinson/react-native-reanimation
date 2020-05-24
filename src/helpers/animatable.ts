@@ -1,5 +1,5 @@
 import Animated, { interpolate, concat } from "react-native-reanimated";
-import { AnimationStyle, AnimationDefinition } from "../types";
+import { AnimatedStyle, AnimationDefinition } from "../types";
 
 const TransformStyles = [
   "perspective",
@@ -24,8 +24,8 @@ const DegreeStyles = [
   "skewY"
 ];
 
-export const combineAnimatedStyles = (animationStyles: AnimationStyle[]) =>
-  animationStyles.reduce<AnimationStyle>(
+export const combineAnimatedStyles = (animationStyles: AnimatedStyle[]) =>
+  animationStyles.reduce<AnimatedStyle>(
     (accumulatedStyles, animationStyle) => ({
       ...accumulatedStyles,
       ...animationStyle,
@@ -46,7 +46,7 @@ export const combineAnimatedStyles = (animationStyles: AnimationStyle[]) =>
 export function createAnimatedStyle(
   definition: AnimationDefinition,
   node: Animated.Node<number>
-): AnimationStyle {
+): AnimatedStyle {
   const { style: definitionStyles, easing: _, ...animation } = definition;
   const { from, to } = animation;
 

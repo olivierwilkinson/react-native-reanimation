@@ -1,16 +1,13 @@
 import React, { useState } from "react";
 import styled from "styled-components/native";
 import Animated from "react-native-reanimated";
-import {
-  useAnimatable,
-  AnimationDefinition,
-  Animations,
-} from "react-native-reanimation";
+import { useAnimatedStyle, AnimationDefinition } from "react-native-reanimation";
 import { TouchableOpacity } from "react-native";
 
 import Cell from "./Cell";
 import PickerActionSheet from "./PickerActionSheet";
 
+import Animations from '../animations';
 const AnimationKeys = Object.keys(Animations);
 
 const ContainerView = styled.View`
@@ -39,13 +36,13 @@ const Square = styled.View`
 export default () => {
   const [animationSelectActive, setAnimationSelectActive] = useState(false);
   const [iterationSelectActive, setIterationSelectActive] = useState(false);
-  const [animation, setAnimation] = useState<AnimationDefinition>(
-    Animations.bounce
+  const [animation, setAnimation] = useState(
+    "bounce"
   );
   const [iterationCount, setIterationCount] = useState<number | "infinite">(
     "infinite"
   );
-  const [animationStyle, animate] = useAnimatable(animation, {
+  const [animationStyle, animate] = useAnimatedStyle(Animations[animation], {
     iterationCount,
   });
 
@@ -54,13 +51,13 @@ export default () => {
       <ContainerView>
         <Cell
           color="rgb(100,100,100)"
-          text="Choose Animation"
+          text={`Animated Style: ${animation}`}
           onPress={() => setAnimationSelectActive(true)}
         />
 
         <Cell
           color="rgb(100,100,100)"
-          text="Choose Iteration Count"
+          text={`Iteration Count: ${iterationCount}`}
           onPress={() => setIterationSelectActive(true)}
         />
 
@@ -77,8 +74,7 @@ export default () => {
         visible={animationSelectActive}
         onCancel={() => setAnimationSelectActive(false)}
         onDone={(newAnimation) => {
-          // @ts-ignore
-          setAnimation(Animations[newAnimation]);
+          setAnimation(newAnimation);
           setAnimationSelectActive(false);
         }}
         options={AnimationKeys}

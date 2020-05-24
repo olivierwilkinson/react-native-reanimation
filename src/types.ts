@@ -139,6 +139,6 @@ export type Transform =
       translateY: Animated.Node<number>;
     };
 
-export type AnimationStyle = ViewStyle & {
+export type AnimatedStyle = ViewStyle & {
   transform?: Transform[];
 };

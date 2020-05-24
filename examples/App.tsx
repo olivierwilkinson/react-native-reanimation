@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { SafeAreaView, Text, TouchableOpacity } from "react-native";
 
-import Cell from "./components/Cell";
-import CardModal from "./components/CardModal";
-import AnimatableExplorer from "./components/AnimatableExplorer";
-import SpringExplorer from "./components/SpringExplorer";
-import DecayExplorer from "./components/DecayExplorer";
-import TimingExplorer from "./components/TimingExporer";
+import Cell from "./src/components/Cell";
+import CardModal from "./src/components/CardModal";
+import AnimatedStyleExplorer from "./src/components/AnimatedStyleExplorer";
+import SpringExplorer from "./src/components/SpringExplorer";
+import DecayExplorer from "./src/components/DecayExplorer";
+import TimingExplorer from "./src/components/TimingExporer";
 
 export default () => {
   const [animatableModalActive, setAnimatableModalActive] = useState(false);
@@ -19,7 +19,7 @@ export default () => {
       <Cell
         color="rgb(100,100,100)"
         onPress={() => setAnimatableModalActive(true)}
-        text="Animatable"
+        text="Animated Style"
       />
       <Cell
         color="rgb(100,100,100)"
@@ -38,11 +38,11 @@ export default () => {
       />
 
       <CardModal
-        title="Animatable"
+        title="Animated Style"
         visible={animatableModalActive}
         onClose={() => setAnimatableModalActive(false)}
       >
-        <AnimatableExplorer />
+        <AnimatedStyleExplorer />
       </CardModal>
 
       <CardModal

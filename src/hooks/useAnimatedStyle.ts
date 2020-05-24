@@ -1,17 +1,17 @@
 import useTiming from "./useTiming";
 import {
   AnimationDefinition,
-  AnimationStyle,
+  AnimatedStyle,
   BaseParams,
   UseTimingParams,
   TimingAnimation
 } from "../types";
 import { createAnimatedStyle } from "../helpers/animatable";
 
-export default function useAnimatable(
+export default function useAnimatedStyle(
   animation: AnimationDefinition,
   params: BaseParams<TimingAnimation>
-): [AnimationStyle, (params?: UseTimingParams) => void] {
+): [AnimatedStyle, (params?: UseTimingParams) => void] {
   const [animationNode, setAnimation] = useTiming({
     easing: animation.easing,
     iterationCount: 1,

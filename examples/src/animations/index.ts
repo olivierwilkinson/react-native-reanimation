@@ -1,6 +1,3 @@
-// @ts-ignore
-import Animated from 'react-native-reanimated';
-
 import * as attentionSeekers from "./attention-seekers";
 import * as bouncingEntrances from "./bouncing-entrances";
 import * as bouncingExits from "./bouncing-exits";
@@ -13,7 +10,7 @@ import * as slidingExits from "./sliding-exits";
 import * as zoomingEntrances from "./zooming-entrances";
 import * as zoomingExits from "./zooming-exits";
 
-const Animations = {
+export default {
   ...attentionSeekers,
   ...bouncingEntrances,
   ...bouncingExits,
@@ -26,5 +23,3 @@ const Animations = {
   ...zoomingEntrances,
   ...zoomingExits
 };
-
-export { Animations };
