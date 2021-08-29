@@ -1,4 +1,4 @@
-import Animated, { interpolate, concat } from "react-native-reanimated";
+import Animated, { concat, interpolateNode } from "react-native-reanimated";
 import { AnimatedStyle, AnimationDefinition } from "../types";
 
 const TransformStyles = [
@@ -63,7 +63,7 @@ export function createAnimatedStyle(
         return [
           style,
           concat(
-            interpolate(node, {
+            interpolateNode(node, {
               inputRange: [0, 1],
               outputRange: [
                 Number(from[style].toString().replace("deg", "")),
@@ -77,7 +77,7 @@ export function createAnimatedStyle(
 
       return [
         style,
-        interpolate(node, {
+        interpolateNode(node, {
           inputRange: [0, 1],
           outputRange: [from[style], to[style]] as number[]
         })
@@ -155,7 +155,7 @@ export function createAnimatedStyle(
       return [
         style,
         concat(
-          interpolate(node, {
+          interpolateNode(node, {
             inputRange: styleInputRange,
             outputRange
           }),
@@ -177,7 +177,7 @@ export function createAnimatedStyle(
 
     return [
       style,
-      interpolate(node, {
+      interpolateNode(node, {
         inputRange: styleInputRange,
         outputRange
       })

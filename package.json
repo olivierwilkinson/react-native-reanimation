@@ -1,6 +1,6 @@
 {
   "name": "react-native-reanimation",
-  "version": "0.0.6",
+  "version": "1.0.0",
   "description": "Merging the simplicity of react-native-animatible with the performance of react-native-reanimated using hooks",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -27,7 +27,7 @@
   "peerDependencies": {
     "react": "^16.8.0",
     "react-native": "^0.59.0",
-    "react-native-reanimated": "*"
+    "react-native-reanimated": ">=2.0.0"
   },
   "devDependencies": {
     "@types/react": "^16.9.34",
@@ -35,6 +35,6 @@
     "typescript": "^3.8.3",
     "react": "^16.8.0",
     "react-native": "^0.59.0",
-    "react-native-reanimated": "*"
+    "react-native-reanimated": "^2.0.0"
   }
 }

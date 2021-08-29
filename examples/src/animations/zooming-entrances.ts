@@ -1,10 +1,10 @@
 // @ts-ignore
-import Animated, { Easing } from "react-native-reanimated";
+import Animated, { EasingNode } from "react-native-reanimated";
 
 function makeZoomInTranslation(translationType: string, pivotPoint: number) {
   const modifier = Math.min(1, Math.max(-1, pivotPoint));
   return {
-    easing: Easing.bezier(0.175, 0.885, 0.32, 1),
+    easing: EasingNode.bezier(0.175, 0.885, 0.32, 1),
     0: {
       opacity: 0,
       scale: 0.1,

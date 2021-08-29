@@ -11,7 +11,7 @@ import Animated, {
   and,
   add,
   stopClock,
-  Easing,
+  EasingNode,
   timing,
 } from "react-native-reanimated";
 
@@ -24,7 +24,7 @@ export default function useTiming({
   position = 0,
   toValue = 1,
   duration = 500,
-  easing = Easing.linear,
+  easing = EasingNode.linear,
   iterationCount: initialIterationCount = 1,
   clock: initialClock = new Clock(),
   blocks: initialBlocks,

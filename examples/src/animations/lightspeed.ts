@@ -1,8 +1,8 @@
 // @ts-ignore
-import Animated, { Easing } from "react-native-reanimated";
+import Animated, { EasingNode } from "react-native-reanimated";
 
 export const lightSpeedIn = {
-  easing: Easing.out(Easing.ease),
+  easing: EasingNode.out(EasingNode.ease),
   0: {
     opacity: 0,
     translateX: 200,
@@ -24,7 +24,7 @@ export const lightSpeedIn = {
 };
 
 export const lightSpeedOut = {
-  easing: Easing.in(Easing.ease),
+  easing: EasingNode.in(EasingNode.ease),
   0: {
     opacity: 1,
     translateX: 0,

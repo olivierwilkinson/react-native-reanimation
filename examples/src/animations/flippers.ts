@@ -1,8 +1,8 @@
 // @ts-ignore
-import Animated, { Easing } from "react-native-reanimated";
+import Animated, { EasingNode } from "react-native-reanimated";
 
 export const flipInX = {
-  easing: Easing.in(Easing.ease),
+  easing: EasingNode.in(EasingNode.ease),
   style: {
     backfaceVisibility: "visible",
     perspective: 400
@@ -28,7 +28,7 @@ export const flipInX = {
 };
 
 export const flipInY = {
-  easing: Easing.in(Easing.ease),
+  easing: EasingNode.in(EasingNode.ease),
   style: {
     backfaceVisibility: "visible",
     perspective: 400

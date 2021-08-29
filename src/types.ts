@@ -6,7 +6,7 @@ import { ViewStyle } from "react-native";
 export interface TimingConfig {
   toValue: Animated.Value<number>;
   duration: Animated.Value<number>;
-  easing: Animated.EasingFunction;
+  easing: Animated.EasingNodeFunction;
 }
 
 export interface SpringConfig {
@@ -85,7 +85,7 @@ export interface UseDecayParams extends BaseParams<DecayAnimation> {
 
 export interface UseTimingParams extends BaseParams<TimingAnimation> {
   duration?: number;
-  easing?: Animated.EasingFunction;
+  easing?: Animated.EasingNodeFunction;
 }
 
 /* Animatable Animation Types */
@@ -97,7 +97,7 @@ export type AnimationDefinition = {
   [input: number]: AnimationStep;
   from?: AnimationStep;
   to?: AnimationStep;
-  easing?: Animated.EasingFunction;
+  easing?: Animated.EasingNodeFunction;
   style?: {
     [style: string]: any;
   };
